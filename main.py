@@ -31,7 +31,7 @@ criterion = nn.BCEWithLogitsLoss()
 grad_scaler = None
 
 if DEVICE == "cuda":
-    grad_scaler = torch.cuda.amp.GradScaler(enabled=amp)
+    grad_scaler = torch.cuda.amp.GradScaler()
 
 Train_ = Train(model, NUM_EPOCHS, training_loader, criterion, optimizer, DEVICE, grad_scaler)
 Train_()
