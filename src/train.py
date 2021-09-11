@@ -23,7 +23,7 @@ class Train():
                 target = mask.to(device=self.DEVICE, dtype=torch.float)
 
                 if self.DEVICE == "cuda":
-                    with torch.cuda.amp.autocast(enabled=amp):
+                    with torch.cuda.amp.autocast():
                         masks_pred = self.model(imgs)
                         masks_pred = masks_pred.to(device=self.DEVICE, dtype=torch.float)
                     
