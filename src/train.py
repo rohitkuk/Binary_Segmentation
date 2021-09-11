@@ -15,7 +15,7 @@ class Train():
     def __call__(self):
         self.model.train()
 
-        for epoch in tqdm(range(1,self.epochs)):
+        for epoch in range(1,self.epochs):
             tqdm_iter = tqdm(enumerate(self.loader), total = len(self.loader), leave = False)
             epoch_loss = 0
             for batch_idx, (img,mask) in tqdm_iter:
