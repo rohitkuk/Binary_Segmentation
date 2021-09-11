@@ -53,4 +53,3 @@ class Train():
                         epoch_loss= "%.2f" % epoch_loss
                     )
                 
-                break
