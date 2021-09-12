@@ -15,7 +15,7 @@ class Train():
     def __call__(self):
         self.model.train()
 
-        for epoch in range(1,self.epochs):
+        for epoch in range(1,self.epochs + 1):
             tqdm_iter = tqdm(enumerate(self.loader), total = len(self.loader), leave = False)
             epoch_loss = 0
             for batch_idx, (img,mask) in tqdm_iter:
@@ -33,8 +33,8 @@ class Train():
                     self.grad_scaler.step(self.optimizer)
                     self.grad_scaler.update()
                     epoch_loss += loss.item()
-                    torch.save(self.model.state_dict(), 'checkpoints/checkpoint_epoch{}.pth'.format(epoch + 1))
-                    tqdm_iter.set_description(f"Training Epoch : [{epoch + 1}/{self.epochs}] ")
+                    torch.save(self.model.state_dict(), 'checkpoints/checkpoint_epoch{}.pth'.format(epoch))
+                    tqdm_iter.set_description(f"Training Epoch : [{epoch}/{self.epochs}] ")
                     tqdm_iter.set_postfix(
                         batch_loss="%.2f" % loss.item(),
                         epoch_loss= "%.2f" % epoch_loss
@@ -46,8 +46,8 @@ class Train():
                     loss.backward()
                     self.optimizer.step()
                     epoch_loss += loss.item()
-                    torch.save(self.model.state_dict(), 'checkpoints/checkpoint_epoch{}.pth'.format(epoch + 1))
-                    tqdm_iter.set_description(f"Training Epoch : [{epoch + 1}/{self.epochs}] ")
+                    torch.save(self.model.state_dict(), 'checkpoints/checkpoint_epoch{}.pth'.format(epoch))
+                    tqdm_iter.set_description(f"Training Epoch : [{epoch}/{self.epochs}] ")
                     tqdm_iter.set_postfix(
                         batch_loss="%.2f" % loss.item(),
                         epoch_loss= "%.2f" % epoch_loss

@@ -1,3 +1,4 @@
+import torch 
 import torch.nn as nn
 from torch.utils.data import Dataset, DataLoader
 import os 
@@ -24,10 +25,16 @@ class HumanSegmentation(Dataset):
         img = np.array(Image.open(self.imgs[index]).convert("RGB"))
         mask = np.array(Image.open(self.masks[index]).convert("L"), dtype=np.float32)
         mask[mask == 255.0] = 1.0
+        
+
 
         if self.img_transforms:
             img = self.img_transforms(img)
         if self.mask_transforms:
             mask = self.mask_transforms(mask)
+
+        print(torch.max(img))
+        print(torch.max(mask))
+
 
         return img, mask
