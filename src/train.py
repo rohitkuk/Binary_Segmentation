@@ -27,7 +27,7 @@ class Train():
                         masks_pred = self.model(imgs)
                         masks_pred = masks_pred.to(device=self.DEVICE, dtype=torch.float)
                     
-                    loss = self.criterion(target, masks_pred) 
+                    loss = self.criterion(masks_pred, target) 
                     self.optimizer.zero_grad(set_to_none=True)
                     self.grad_scaler.scale(loss).backward()
                     self.grad_scaler.step(self.optimizer)
@@ -41,7 +41,7 @@ class Train():
                     )
                 else:
                     masks_pred = self.model(imgs) 
-                    loss = self.criterion(target, masks_pred)   
+                    loss = self.criterion(masks_pred, target)    
                     self.optimizer.zero_grad(set_to_none=True)
                     loss.backward()
                     self.optimizer.step()
