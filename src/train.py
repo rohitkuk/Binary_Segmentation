@@ -20,13 +20,16 @@ class Train():
             epoch_loss = 0
             for batch_idx, (img,mask) in tqdm_iter:
                 imgs = img.to(device=self.DEVICE, dtype=torch.float32)
-                target = mask.to(device=self.DEVICE, dtype=torch.float)
+                target = mask.to(device=self.DEVICE, dtype=torch.float32)
 
                 if self.DEVICE == "cuda":
                     with torch.cuda.amp.autocast():
                         masks_pred = self.model(imgs)
-                        masks_pred = masks_pred.to(device=self.DEVICE, dtype=torch.float)
+                        masks_pred = masks_pred.to(device=self.DEVICE, dtype=torch.float32)
                     
+                            print(torch.max(img))
+                            print(torch.max(target))  
+                            print(torch.max(masks_pred))  
                     loss = self.criterion(masks_pred, target) 
                     self.optimizer.zero_grad(set_to_none=True)
                     self.grad_scaler.scale(loss).backward()

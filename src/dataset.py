@@ -32,9 +32,4 @@ class HumanSegmentation(Dataset):
             img = self.img_transforms(img)
         if self.mask_transforms:
             mask = self.mask_transforms(mask)
-
-        print(torch.max(img))
-        print(torch.max(mask))
-
-
         return img, mask
