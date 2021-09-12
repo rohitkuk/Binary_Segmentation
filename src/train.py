@@ -27,9 +27,9 @@ class Train():
                         masks_pred = self.model(imgs)
                         masks_pred = masks_pred.to(device=self.DEVICE, dtype=torch.float32)
                     
-                            print(torch.max(img))
-                            print(torch.max(target))  
-                            print(torch.max(masks_pred))  
+                    print(torch.max(img))
+                    print(torch.max(target))  
+                    print(torch.max(masks_pred))  
                     loss = self.criterion(masks_pred, target) 
                     self.optimizer.zero_grad(set_to_none=True)
                     self.grad_scaler.scale(loss).backward()
