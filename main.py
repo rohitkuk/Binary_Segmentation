@@ -27,7 +27,7 @@ model = UNet(3,1).to(DEVICE)
 optimizer = optim.RMSprop(model.parameters(), lr=LEARNING_RATE, weight_decay=1e-8, momentum=0.9)
 scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, 'max', patience=2)  # goal: maximize Dice score
 
-criterion = nn.DiceBCELoss()
+criterion = DiceBCELoss()
 
 grad_scaler = None
 
